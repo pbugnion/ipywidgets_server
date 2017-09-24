@@ -40,7 +40,7 @@ var loaders = [
 module.exports = [{
     entry: ['babel-polyfill', './index.js'],
     output: {
-        filename: './bundle.js',
+        filename: '../dist/bundle.js',
         path: __dirname,
     },
     module: {
