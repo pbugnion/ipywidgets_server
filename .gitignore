@@ -1,2 +1,4 @@
 node_modules
 __pycache__
+dist/
+npm-debug.log
