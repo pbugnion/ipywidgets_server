@@ -1,0 +1,4 @@
+@import "@jupyter-widgets/controls/css/widgets.css";
+:root {
+    --jp-widgets-border-width: 2px;
+}
