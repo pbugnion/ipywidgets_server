@@ -19,7 +19,6 @@ from jupyter_client.kernelspec import KernelSpecManager
 root = os.path.dirname(__file__)
 
 class CustomKernelSpecManager(KernelSpecManager):
-    pass
 
     def find_kernel_specs(self):
         return {'mod_python': root}
@@ -27,37 +26,7 @@ class CustomKernelSpecManager(KernelSpecManager):
 
 ksm = CustomKernelSpecManager()
 
-
-class CustomKernelManager(MappingKernelManager):
-
-    @property
-    def default_kernel_name(self):
-        return 'mod_python'
-
-    @property
-    def kernel_spec_manager(self):
-        return ksm
-
-    # @gen.coroutine
-    # def start_kernel(self, *args, **kwargs):
-    #     print('starting kernel...')
-    #     kernel_id = yield gen.maybe_future(super(CustomKernelManager, self).start_kernel(*args, **kwargs))
-    #     if kernel_id:
-    #         kernel = self.get_kernel(kernel_id)
-    #         client = kernel.client()
-    #         client.start_channels()
-    #         client.wait_for_ready()
-    #         client.execute('a = 53')
-    #         msg = client.shell_channel.get_msg(block=True)
-    #         print(msg)
-    #         msg = client.iopub_channel.get_msg(block=True)
-    #         print(msg)
-    #         client.stop_channels()
-    #     raise gen.Return(kernel_id)
-
-
-m = CustomKernelManager()
-
+m = MappingKernelManager(default_kernel_name='mod_python', kernel_spec_manager=ksm)
 
 class CustomKernelHandler(MainKernelHandler):
     @property
@@ -79,14 +48,6 @@ class CustomKernelSpecHandler(MainKernelSpecHandler):
     @property
     def kernel_spec_manager(self):
         return ksm
-
-    # @json_errors
-    # def get(self):
-    #     model = {}
-
-    #     self.set_header("Content-Type", 'application/json')
-    #     self.finish(json.dumps(model))
-
 
 
 _kernel_id_regex = r"(?P<kernel_id>\w+-\w+-\w+-\w+-\w+)"
