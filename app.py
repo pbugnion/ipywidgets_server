@@ -21,24 +21,22 @@ from jupyter_client.kernelspec \
 
 ROOT = os.path.dirname(__file__)
 
+
 class CustomKernelSpecManager(KernelSpecManager):
 
     def find_kernel_specs(self):
         return {'mod_python': ROOT}
 
 
-ksm = CustomKernelSpecManager()
-
-m = MappingKernelManager(
-    default_kernel_name='mod_python', 
-    kernel_spec_manager=ksm
-)
-
-
 _kernel_id_regex = r"(?P<kernel_id>\w+-\w+-\w+-\w+-\w+)"
 
 
 def make_app():
+    ksm = CustomKernelSpecManager()
+    m = MappingKernelManager(
+        default_kernel_name='mod_python', 
+        kernel_spec_manager=ksm
+    )
     return tornado.web.Application(
         [
             (r'/api/kernels', MainKernelHandler),
