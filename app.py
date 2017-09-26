@@ -1,20 +1,22 @@
 
 from zmq.eventloop import ioloop
-ioloop.install()
 
-import os
-import json
+ioloop.install()  # This needs to happen before the tornado imports
 
-import tornado.ioloop
-import tornado.web
-from tornado import gen
+import os  # noqa: E402
 
-from notebook.services.kernels.handlers import MainKernelHandler, ZMQChannelsHandler
-from notebook.services.kernels.kernelmanager import MappingKernelManager
-from notebook.services.kernelspecs.handlers import MainKernelSpecHandler
-from notebook.base.handlers import json_errors
-from jupyter_client.kernelspec import KernelSpecManager
+import tornado.ioloop  # noqa: E402
+import tornado.web  # noqa: E402
 
+from notebook.services.kernels.handlers import (  # noqa: E402
+    MainKernelHandler, ZMQChannelsHandler
+)
+from notebook.services.kernels.kernelmanager \
+    import MappingKernelManager  # noqa: E402
+from notebook.services.kernelspecs.handlers \
+    import MainKernelSpecHandler  # noqa: E402
+from jupyter_client.kernelspec \
+    import KernelSpecManager  # noqa: E402
 
 root = os.path.dirname(__file__)
 
