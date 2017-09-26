@@ -4,6 +4,8 @@ from zmq.eventloop import ioloop
 ioloop.install()  # This needs to happen before the tornado imports
 
 import os  # noqa: E402
+import shutil  # noqa: E402
+import tempfile  # noqa: E402
 
 import tornado.ioloop  # noqa: E402
 import tornado.web  # noqa: E402
@@ -31,11 +33,12 @@ class CustomKernelSpecManager(KernelSpecManager):
 _kernel_id_regex = r"(?P<kernel_id>\w+-\w+-\w+-\w+-\w+)"
 
 
-def make_app():
+def make_app(connection_dir):
     kernel_spec_manager = CustomKernelSpecManager()
     kernel_manager = MappingKernelManager(
         default_kernel_name='mod_python',
-        kernel_spec_manager=kernel_spec_manager
+        kernel_spec_manager=kernel_spec_manager,
+        connection_dir=connection_dir
     )
     handlers = [
         (r'/api/kernels', MainKernelHandler),
@@ -58,6 +61,11 @@ def make_app():
 
 
 if __name__ == "__main__":
-    app = make_app()
-    app.listen(8889)
-    tornado.ioloop.IOLoop.current().start()
+    connection_dir = tempfile.mkdtemp()
+    print(f'Using {connection_dir} to store connection files')
+    try:
+        app = make_app(connection_dir)
+        app.listen(8889)
+        tornado.ioloop.IOLoop.current().start()
+    finally:
+        shutil.rmtree(connection_dir)
