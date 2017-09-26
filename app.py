@@ -18,12 +18,13 @@ from notebook.services.kernelspecs.handlers \
 from jupyter_client.kernelspec \
     import KernelSpecManager  # noqa: E402
 
-root = os.path.dirname(__file__)
+
+ROOT = os.path.dirname(__file__)
 
 class CustomKernelSpecManager(KernelSpecManager):
 
     def find_kernel_specs(self):
-        return {'mod_python': root}
+        return {'mod_python': ROOT}
 
 
 ksm = CustomKernelSpecManager()
@@ -48,7 +49,7 @@ def make_app():
                 r"/(.*)", 
                 tornado.web.StaticFileHandler, 
                 {
-                    'path': root,
+                    'path': ROOT,
                     'default_filename': 'index.html'
                 }
             )
