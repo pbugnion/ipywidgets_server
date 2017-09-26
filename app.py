@@ -36,7 +36,6 @@ m = MappingKernelManager(
 
 
 _kernel_id_regex = r"(?P<kernel_id>\w+-\w+-\w+-\w+-\w+)"
-_kernel_action_regex = r"(?P<action>restart|interrupt)"
 
 
 def make_app():
