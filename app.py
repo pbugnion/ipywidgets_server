@@ -34,23 +34,24 @@ _kernel_id_regex = r"(?P<kernel_id>\w+-\w+-\w+-\w+-\w+)"
 def make_app():
     kernel_spec_manager = CustomKernelSpecManager()
     kernel_manager = MappingKernelManager(
-        default_kernel_name='mod_python', 
+        default_kernel_name='mod_python',
         kernel_spec_manager=kernel_spec_manager
     )
+    handlers = [
+        (r'/api/kernels', MainKernelHandler),
+        (r'/api/kernels/%s/channels' % _kernel_id_regex, ZMQChannelsHandler),
+        (r'/api/kernelspecs', MainKernelSpecHandler),
+        (
+            r"/(.*)", 
+            tornado.web.StaticFileHandler, 
+            {
+                'path': ROOT,
+                'default_filename': 'index.html'
+            }
+        )
+    ]
     return tornado.web.Application(
-        [
-            (r'/api/kernels', MainKernelHandler),
-            (r'/api/kernels/%s/channels' % _kernel_id_regex, ZMQChannelsHandler),
-            (r'/api/kernelspecs', MainKernelSpecHandler),
-            (
-                r"/(.*)", 
-                tornado.web.StaticFileHandler, 
-                {
-                    'path': ROOT,
-                    'default_filename': 'index.html'
-                }
-            )
-        ],
+        handlers,
         kernel_manager=kernel_manager,
         kernel_spec_manager=kernel_spec_manager
     )
