@@ -32,10 +32,10 @@ _kernel_id_regex = r"(?P<kernel_id>\w+-\w+-\w+-\w+-\w+)"
 
 
 def make_app():
-    ksm = CustomKernelSpecManager()
-    m = MappingKernelManager(
+    kernel_spec_manager = CustomKernelSpecManager()
+    kernel_manager = MappingKernelManager(
         default_kernel_name='mod_python', 
-        kernel_spec_manager=ksm
+        kernel_spec_manager=kernel_spec_manager
     )
     return tornado.web.Application(
         [
@@ -51,8 +51,8 @@ def make_app():
                 }
             )
         ],
-        kernel_manager=m,
-        kernel_spec_manager=ksm
+        kernel_manager=kernel_manager,
+        kernel_spec_manager=kernel_spec_manager
     )
 
 
