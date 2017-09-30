@@ -13,7 +13,7 @@ import tornado.ioloop  # noqa: E402
 import tornado.web  # noqa: E402
 
 from notebook.services.kernels.handlers import (  # noqa: E402
-    MainKernelHandler, ZMQChannelsHandler
+    KernelHandler, MainKernelHandler, ZMQChannelsHandler
 )
 
 from notebook.utils import url_path_join, url_escape
@@ -100,6 +100,7 @@ class WidgetsServer(Application):
                     'object_name': self.object_name
                 }
             ),
+            (r'/api/kernels/%s' % _kernel_id_regex, KernelHandler),
             (r'/api/kernels/%s/channels' % _kernel_id_regex, ZMQChannelsHandler),
             (r'/api/kernelspecs', MainKernelSpecHandler),
             (
