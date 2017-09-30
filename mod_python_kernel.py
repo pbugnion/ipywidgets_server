@@ -1,4 +1,6 @@
 
+import logging
+
 from ipykernel.kernelbase import Kernel
 from ipykernel.kernelapp import IPKernelApp
 from ipykernel.ipkernel import IPythonKernel
@@ -35,4 +37,5 @@ if __name__ == '__main__':
     object = sys.argv[4]
     IPKernelApp.launch_instance(
         kernel_class=ModPythonKernel,
+        log_level=logging.DEBUG,
         user_ns=dict(exec_module=module, exec_object=object))
