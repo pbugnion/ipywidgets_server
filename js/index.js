@@ -56,6 +56,7 @@ $(document).ready(async () => {
             }
         }
         else if (KernelMessage.isErrorMsg(msg)) {
+            // Show errors to help with debugging
             const model = msg.content
             model.output_type = 'error'
             outputModel.add(model)
