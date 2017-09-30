@@ -78,14 +78,10 @@ class WidgetsServer(Application):
     object_name = Unicode().tag(config=True)
     connection_dir = Unicode().tag(config=True)
 
-    @default('log_level')
-    def _default_log_level(self):
-        return logging.DEBUG
-
     @default('connection_dir')
     def _default_connection_dir(self):
         connection_dir = tempfile.mkdtemp()
-        print(f'Using {connection_dir} to store connection files')
+        self.log.info(f'Using {connection_dir} to store connection files')
         return connection_dir
 
     def start(self):
