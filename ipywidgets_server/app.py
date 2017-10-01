@@ -32,14 +32,13 @@ from traitlets import Unicode, Integer, default
 
 
 ROOT = Path(os.path.dirname(__file__))
-KERNEL_ROOT = ROOT / 'kernel'
 STATIC_ROOT = ROOT / 'static'
 
 
 class CustomKernelSpecManager(KernelSpecManager):
 
     def find_kernel_specs(self):
-        return {'ipywidgets_server_kernel': str(KERNEL_ROOT)}
+        return {'ipywidgets_server_kernel': str(ROOT)}
 
 
 class CustomKernelHandler(MainKernelHandler):

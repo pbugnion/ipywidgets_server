@@ -116,7 +116,7 @@ class NPM(Command):
                 raise ValueError(msg)
 
         # update package data in case this created new files
-        update_package_data(self.distribution)
+        # update_package_data(self.distribution)
 
 
 version_ns = {}
@@ -128,7 +128,6 @@ setup_args = {
     'name': 'ipywidgets_server',
     'version': version_ns['__version__'],
     'description': 'Standalone server for ipywidgets',
-    'include_package_data': True,
     'packages': find_packages(),
     'zip_safe': False,
     'cmdclass': {
@@ -136,6 +135,13 @@ setup_args = {
         'egg_info': js_prerelease(egg_info),
         'sdist': js_prerelease(sdist, strict=True),
         'jsdeps': NPM,
+    },
+    'package_data': {
+        'ipywidgets_server': [
+            'static/index.html', 
+            'static/dist/bundle.js', 
+            'kernel.json'
+        ]
     },
     'entry_points': {
         'console_scripts': [
