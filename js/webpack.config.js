@@ -33,7 +33,7 @@ module.exports = [{
     entry: ['babel-polyfill', './index.js'],
     output: {
         filename: 'bundle.js',
-        path: __dirname + '/../dist/',
+        path: __dirname + '/../ipywidgets_server/static/dist/',
     },
     module: {
         loaders: loaders

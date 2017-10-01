@@ -8,6 +8,7 @@ import shutil  # noqa: E402
 import tempfile  # noqa: E402
 import json
 import logging
+from pathlib import Path
 
 import tornado.ioloop  # noqa: E402
 import tornado.web  # noqa: E402
@@ -30,15 +31,14 @@ from traitlets.config.application import Application
 from traitlets import Unicode, default
 
 
-ROOT = os.path.dirname(__file__)
-CODE = 'test'
-OBJECT = 'vbox'
+ROOT = Path(os.path.dirname(__file__))
+STATIC_ROOT = ROOT / 'static'
 
 
 class CustomKernelSpecManager(KernelSpecManager):
 
     def find_kernel_specs(self):
-        return {'mod_python': ROOT}
+        return {'mod_python': str(ROOT)}
 
 
 class CustomKernelHandler(MainKernelHandler):
@@ -107,7 +107,7 @@ class WidgetsServer(Application):
                 r"/(.*)", 
                 tornado.web.StaticFileHandler, 
                 {
-                    'path': ROOT,
+                    'path': STATIC_ROOT,
                     'default_filename': 'index.html'
                 }
             )
