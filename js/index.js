@@ -11,7 +11,7 @@ import './widgets.css'
 const BASEURL = window.location.href
 const WSURL = 'ws://' + window.location.host
 
-$(document).ready(async () => {
+document.addEventListener('DOMContentLoaded', async () => {
     let connectionInfo = ServerConnection.makeSettings({
         baseUrl: BASEURL,
         wsUrl: WSURL
@@ -62,4 +62,4 @@ $(document).ready(async () => {
             outputModel.add(model)
         }
     }
-});
+}, false);
