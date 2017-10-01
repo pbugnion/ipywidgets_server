@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link 
+            rel="stylesheet" 
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" 
+            integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" 
+            crossorigin="anonymous"
+        />
+        <style>
+            html, body {
+                height: 100%;
+            }
+
+            .fill {
+                min-height: 100%;
+                height: 100%;
+            }
+        </style>
         <script src="./dist/bundle.js"></script>
     </head>
 
     <body>
-        <h1>IPywidgets server</h1>
-        <div id="result"></div>
-        <div id="errors"></div>
+        <div class="container fill">
+            <div class="row align-items-center fill">
+                <div class="col">
+                    <div id="result"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div id="errors"></div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
