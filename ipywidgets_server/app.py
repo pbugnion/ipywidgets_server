@@ -74,6 +74,23 @@ _kernel_id_regex = r"(?P<kernel_id>\w+-\w+-\w+-\w+-\w+)"
 
 
 class WidgetsServer(Application):
+    name = 'ipywidgets_server'
+    examples = 'ipywidgets_server --port 8888 example:widget'
+    description = Unicode(
+        """ ipywidgets_server [OPTIONS] APP_MODULE
+
+        This launches a stand-alone server for Jupyter widgets.
+        """
+    )
+    option_description = Unicode(
+        """
+        app_module: 
+            String representing the widget to show. This must
+            be a string of format <module>:<object>, where <module>
+            is a python module that can be imported, and <object>
+            is the variable containing the widget in that module.
+        """
+    )
     module_name = Unicode()
     object_name = Unicode()
     port = Integer(
@@ -81,6 +98,9 @@ class WidgetsServer(Application):
         config=True, 
         help='Port of the ipywidgets server. Default 8888.'
     )
+    aliases = {
+        'port': 'WidgetsServer.port'
+    }
     connection_dir = Unicode().tag(config=True)
 
     @default('connection_dir')
