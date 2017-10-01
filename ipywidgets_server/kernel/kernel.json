@@ -1,0 +1,5 @@
+{
+    "display_name": "IpyWidgetsServerKernel",
+    "language": "python",
+    "argv": ["python", "-m", "ipywidgets_server.kernel", "-f", "{connection_file}"] 
+}

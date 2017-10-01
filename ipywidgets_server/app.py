@@ -32,13 +32,14 @@ from traitlets import Unicode, Integer, default
 
 
 ROOT = Path(os.path.dirname(__file__))
+KERNEL_ROOT = ROOT / 'kernel'
 STATIC_ROOT = ROOT / 'static'
 
 
 class CustomKernelSpecManager(KernelSpecManager):
 
     def find_kernel_specs(self):
-        return {'mod_python': str(ROOT)}
+        return {'ipywidgets_server_kernel': str(KERNEL_ROOT)}
 
 
 class CustomKernelHandler(MainKernelHandler):
@@ -124,7 +125,7 @@ class WidgetsServer(Application):
     def start(self):
         kernel_spec_manager = CustomKernelSpecManager()
         kernel_manager = MappingKernelManager(
-            default_kernel_name='mod_python',
+            default_kernel_name='ipywidgets_server_kernel',
             kernel_spec_manager=kernel_spec_manager,
             connection_dir=self.connection_dir
         )
@@ -158,5 +159,8 @@ class WidgetsServer(Application):
         tornado.ioloop.IOLoop.current().start()
 
 
-if __name__ == "__main__":
-    WidgetsServer.launch_instance()
+main = WidgetsServer.launch_instance
+
+
+if __name__ == '__main__':
+    main()

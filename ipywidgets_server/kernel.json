@@ -1,5 +1,0 @@
-{
-    "display_name": "ModPython",
-    "language": "python",
-    "argv": ["python", "-m", "mod_python_kernel", "-f", "{connection_file}"] 
-}

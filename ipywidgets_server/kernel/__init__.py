@@ -2,7 +2,6 @@
 import logging
 
 from ipykernel.kernelbase import Kernel
-from ipykernel.kernelapp import IPKernelApp
 from ipykernel.ipkernel import IPythonKernel
 
 from traitlets import Unicode
@@ -13,7 +12,7 @@ import {module}
 """
 
 
-class ModPythonKernel(IPythonKernel):
+class WidgetsServerKernel(IPythonKernel):
     exec_module = Unicode()
     exec_object = Unicode()
 
@@ -25,17 +24,7 @@ class ModPythonKernel(IPythonKernel):
             object=self.user_ns['exec_object']
         )
         parent['content'] = {'code': code, 'silent': False}
-        super(ModPythonKernel, self).execute_request(stream, ident, parent)
+        super(WidgetsServerKernel, self).execute_request(stream, ident, parent)
 
     def execute_request(self, stream, ident, parent):
         pass
-
-
-if __name__ == '__main__':
-    import sys
-    module = sys.argv[3]
-    object = sys.argv[4]
-    IPKernelApp.launch_instance(
-        kernel_class=ModPythonKernel,
-        log_level=logging.DEBUG,
-        user_ns=dict(exec_module=module, exec_object=object))

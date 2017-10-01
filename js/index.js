@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const kernelSpecs = await Kernel.getSpecs(connectionInfo)
 
+    console.log(`Starting kernel ${kernelSpecs.default}`)
+
     const kernel = await Kernel.startNew({
         name: kernelSpecs.default,
         serverSettings: connectionInfo
