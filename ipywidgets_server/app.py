@@ -84,6 +84,18 @@ class WidgetsServer(Application):
         self.log.info(f'Using {connection_dir} to store connection files')
         return connection_dir
 
+    def parse_command_line(self, argv=None):
+        super(WidgetsServer, self).parse_command_line(argv)
+        try:
+            module_object_str = self.extra_args[0]
+        except KeyError:
+            print('Missing module:object parameter')
+            sys.exit(1)
+        [module_name, object_name] = module_object_str.split(':')
+        self.module_name = module_name
+        self.object_name = object_name
+
+
     def start(self):
         kernel_spec_manager = CustomKernelSpecManager()
         kernel_manager = MappingKernelManager(
