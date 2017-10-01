@@ -28,7 +28,7 @@ from jupyter_client.kernelspec \
 
 from jupyter_client.jsonutil import date_default
 from traitlets.config.application import Application
-from traitlets import Unicode, default
+from traitlets import Unicode, Integer, default
 
 
 ROOT = Path(os.path.dirname(__file__))
@@ -74,8 +74,13 @@ _kernel_id_regex = r"(?P<kernel_id>\w+-\w+-\w+-\w+-\w+)"
 
 
 class WidgetsServer(Application):
-    module_name = Unicode().tag(config=True)
-    object_name = Unicode().tag(config=True)
+    module_name = Unicode()
+    object_name = Unicode()
+    port = Integer(
+        8888,
+        config=True, 
+        help='Port of the ipywidgets server. Default 8888.'
+    )
     connection_dir = Unicode().tag(config=True)
 
     @default('connection_dir')
@@ -129,7 +134,7 @@ class WidgetsServer(Application):
             kernel_manager=kernel_manager,
             kernel_spec_manager=kernel_spec_manager
         )
-        app.listen(8889)
+        app.listen(self.port)
         tornado.ioloop.IOLoop.current().start()
 
 

@@ -8,8 +8,8 @@ import { WidgetManager } from './manager'
 
 import './widgets.css'
 
-const BASEURL = 'http://127.0.0.1:8889'
-const WSURL = 'ws://127.0.0.1:8889'
+const BASEURL = window.location.href
+const WSURL = 'ws://' + window.location.host
 
 $(document).ready(async () => {
     let connectionInfo = ServerConnection.makeSettings({
