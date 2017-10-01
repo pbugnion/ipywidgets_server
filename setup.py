@@ -112,7 +112,7 @@ class NPM(Command):
             if not os.path.exists(t):
                 msg = 'Missing file: %s' % t
                 if not has_npm:
-                    msg += '\nnpm is required to build a development version of widgetsnbextension'
+                    msg += '\nnpm is required to build a development version'
                 raise ValueError(msg)
 
         # update package data in case this created new files
