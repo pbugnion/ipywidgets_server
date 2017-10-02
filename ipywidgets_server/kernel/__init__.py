@@ -16,7 +16,8 @@ class WidgetsServerKernel(IPythonKernel):
     exec_module = Unicode()
     exec_object = Unicode()
 
-    msg_types = IPythonKernel.msg_types + ['custom_message']
+    # Restrict the message types to disallow arbitrary code execution
+    msg_types = ['comm_info_request', 'kernel_info_request', 'custom_message']
 
     def custom_message(self, stream, ident, parent):
         code = CODE_TEMPLATE.format(
@@ -25,6 +26,3 @@ class WidgetsServerKernel(IPythonKernel):
         )
         parent['content'] = {'code': code, 'silent': False}
         super(WidgetsServerKernel, self).execute_request(stream, ident, parent)
-
-    def execute_request(self, stream, ident, parent):
-        pass
