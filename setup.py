@@ -148,6 +148,9 @@ setup_args = {
             'ipywidgets-server = ipywidgets_server.app:main'
         ]
     },
+    'install_requires': [
+        'ipywidgets>=7.0.0'
+    ],
     'author': 'Pascal Bugnion',
     'author_email': 'pascal@bugnion.org',
     'keywords': [
