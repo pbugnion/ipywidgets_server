@@ -118,9 +118,11 @@ class WidgetsServer(Application):
         super(WidgetsServer, self).parse_command_line(argv)
         try:
             module_object_str = self.extra_args[0]
-        except KeyError:
-            print('Missing module:object parameter')
-            sys.exit(1)
+        except IndexError:
+            self.log.critical('Bad command line parameters.')
+            self.log.critical('Missing APP_MODULE parameter.')
+            self.log.critical('Run `ipywidgets-server --help` for help on command line parameters.')
+            exit(1)
         [module_name, object_name] = module_object_str.split(':')
         self.module_name = module_name
         self.object_name = object_name
