@@ -101,10 +101,15 @@ class WidgetsServer(Application):
     aliases = {
         'port': 'WidgetsServer.port'
     }
-    connection_dir = Unicode().tag(config=True)
+    connection_dir_root = Unicode(
+        config=True,
+        help=f'Location of temporary connection files. Defaults to system `tempfile.gettempdir()` value.'
+    )
+    connection_dir = Unicode()
 
-    @default('connection_dir')
+    @default('connection_dir_root')
     def _default_connection_dir(self):
+        return tempfile.gettempdir()
         connection_dir = tempfile.mkdtemp()
         self.log.info(f'Using {connection_dir} to store connection files')
         return connection_dir
@@ -121,11 +126,16 @@ class WidgetsServer(Application):
         self.object_name = object_name
 
     def start(self):
+        connection_dir = tempfile.mkdtemp(
+            prefix='ipywidgets_server_',
+            dir=self.connection_dir_root
+        )
+        self.log.info(f'Storing connection files in {connection_dir}.')
         kernel_spec_manager = CustomKernelSpecManager()
         kernel_manager = MappingKernelManager(
             default_kernel_name='ipywidgets_server_kernel',
             kernel_spec_manager=kernel_spec_manager,
-            connection_dir=self.connection_dir
+            connection_dir=connection_dir
         )
         handlers = [
             (
@@ -155,7 +165,11 @@ class WidgetsServer(Application):
         )
         app.listen(self.port)
         self.log.info(f'Ipywidgets server listening on port {self.port}.')
-        tornado.ioloop.IOLoop.current().start()
+        try:
+            tornado.ioloop.IOLoop.current().start()
+        finally:
+            shutil.rmtree(connection_dir)
+
 
 
 main = WidgetsServer.launch_instance
