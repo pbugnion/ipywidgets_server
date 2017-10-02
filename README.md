@@ -5,6 +5,15 @@ Jupyter widgets server
 Ever wanted to display Jupyter widgets outside of a notebook environment?
 This lets you do it.
 
+## Installation
+
+To install from source, clone this repository and run:
+
+```
+$ cd ipywidgets_server/
+$ pip install -e .
+```
+
 ## Usage
 
 Create a python file (not a notebook) that renders your favourite widget. Let's, for
