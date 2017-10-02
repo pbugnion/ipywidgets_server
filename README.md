@@ -5,7 +5,7 @@ Jupyter widgets server
 Ever wanted to display Jupyter widgets outside of a notebook environment?
 This lets you do it.
 
-** Warnings** 
+** Warnings ** 
 
 This server is very much embryonic. You are strongly encouraged not to use this in production.
 
