@@ -5,13 +5,13 @@ Jupyter widgets server
 Ever wanted to display Jupyter widgets outside of a notebook environment?
 This lets you do it.
 
-** Warnings ** 
+**Warnings**
 
 This server is very much embryonic. You are strongly encouraged not to use this in production.
 
 This only supports Python 3.6 at present (PRs welcome)!
 
-## Installation
+## Installation
 
 To install from source, clone this repository and run:
 
@@ -20,7 +20,7 @@ $ cd ipywidgets_server/
 $ pip install -e .
 ```
 
-## Usage
+## Usage
 
 Create a python file (not a notebook) that renders your favourite widget. Let's, for
 instance, create a file called `example.py` that contains:
@@ -56,7 +56,7 @@ For information on other command line arguments, run:
 $ ipywidgets-server --help
 ```
 
-## Credit where it's due
+## Credit where it's due
 
 Much of the frontend code for this is inspired by the *web3* example in
 *ipywidgets*
