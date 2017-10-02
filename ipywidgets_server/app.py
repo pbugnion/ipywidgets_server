@@ -95,7 +95,7 @@ class WidgetsServer(Application):
     object_name = Unicode()
     port = Integer(
         8888,
-        config=True, 
+        config=True,
         help='Port of the ipywidgets server. Default 8888.'
     )
     aliases = {
@@ -120,7 +120,6 @@ class WidgetsServer(Application):
         self.module_name = module_name
         self.object_name = object_name
 
-
     def start(self):
         kernel_spec_manager = CustomKernelSpecManager()
         kernel_manager = MappingKernelManager(
@@ -142,7 +141,7 @@ class WidgetsServer(Application):
             (r'/api/kernelspecs', MainKernelSpecHandler),
             (
                 r"/(.*)", 
-                tornado.web.StaticFileHandler, 
+                tornado.web.StaticFileHandler,
                 {
                     'path': STATIC_ROOT,
                     'default_filename': 'index.html'
@@ -155,6 +154,7 @@ class WidgetsServer(Application):
             kernel_spec_manager=kernel_spec_manager
         )
         app.listen(self.port)
+        self.log.info(f'Ipywidgets server listening on port {self.port}.')
         tornado.ioloop.IOLoop.current().start()
 
 
