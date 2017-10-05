@@ -69,8 +69,11 @@ class NPM(Command):
 
     node_modules = os.path.join(node_root, 'node_modules')
 
+    lib_root = os.path.join(here, 'ipywidgets_server', 'static', 'dist')
     targets = [
-        os.path.join(here, 'ipywidgets_server', 'static', 'dist', 'bundle.js')
+        os.path.join(lib_root, 'libwidgets.js'),
+        os.path.join(lib_root, '@jupyter-widgets', 'base.js'),
+        os.path.join(lib_root, '@jupyter-widgets', 'controls.js')
     ]
 
     def initialize_options(self):
@@ -138,8 +141,8 @@ setup_args = {
     },
     'package_data': {
         'ipywidgets_server': [
-            'static/index.html', 
-            'static/dist/bundle.js', 
+            'static/*',
+            'static/dist/*',
             'kernel.json'
         ]
     },
