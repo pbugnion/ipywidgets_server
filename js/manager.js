@@ -6,11 +6,12 @@ import * as pWidget from '@phosphor/widgets';
 import { HTMLManager } from '@jupyter-widgets/html-manager';
 
 export class WidgetManager extends HTMLManager {
-    constructor(kernel, el) {
+    constructor(kernel, el, loader) {
         super();
         this.kernel = kernel;
         this.registerWithKernel(kernel)
         this.el = el;
+        this.loader = loader;
     }
 
     registerWithKernel(kernel) {
