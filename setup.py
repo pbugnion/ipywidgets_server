@@ -143,6 +143,7 @@ setup_args = {
         'ipywidgets_server': [
             'static/*',
             'static/dist/*',
+            'static/dist/@jupyter-widgets/*',
             'kernel.json'
         ]
     },
