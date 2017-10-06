@@ -8,7 +8,14 @@ requirejs.config({
 
 require(['libwidgets'], function(lib) {
     var BASEURL = window.location.href
-    var WSURL = 'ws://' + window.location.host
+
+    var WSURL;
+    if (window.location.protocol.startsWith('https')) {
+        WSURL = 'wss://' + window.location.host
+    }
+    else {
+        WSURL = 'ws://' + window.location.host
+    }
 
     if (document.readyState === 'complete') {
         lib.renderWidgets(BASEURL, WSURL, lib.requireLoader);
