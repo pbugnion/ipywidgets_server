@@ -70,3 +70,5 @@ Much of the frontend code for this is inspired by the *web3* example in
 The original idea of writing a custom kernel to stop arbitrary code execution
 on the server came from [Maarten
 Breddels](https://twitter.com/maartenbreddels).
+
+Most of the implementation is inspired by various parts of ipywidgets and Jupyter.
