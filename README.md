@@ -7,11 +7,17 @@ This lets you do it.
 
 **Warnings**
 
-This server is very much embryonic. You are strongly encouraged not to use this in production.
+This project is very much embryonic. You probably should not use this in production.
 
 This only supports Python 3.6 at present (PRs welcome)!
 
 ## Installation
+
+You should install *ipywidgets_server* with `pip`:
+
+```
+$ pip install ipywidgets_server
+```
 
 To install from source, clone this repository and run:
 
