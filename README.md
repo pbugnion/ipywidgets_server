@@ -65,8 +65,7 @@ $ ipywidgets-server --help
 ## Credit where it's due
 
 Much of the frontend code for this is inspired by the *web3* example in
-*ipywidgets*
-[link](https://github.com/jupyter-widgets/ipywidgets/tree/master/examples).
+[ipywidgets](https://github.com/jupyter-widgets/ipywidgets/tree/master/examples).
 
 The original idea of writing a custom kernel to stop arbitrary code execution
 on the server came from [Maarten
