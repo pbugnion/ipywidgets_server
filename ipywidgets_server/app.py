@@ -141,7 +141,7 @@ class WidgetsServer(Application):
         )
         handlers = [
             (
-                r'/api/kernels', 
+                r'/api/kernels',
                 CustomKernelHandler,
                 {
                     'module_name': self.module_name,
@@ -152,7 +152,7 @@ class WidgetsServer(Application):
             (r'/api/kernels/%s/channels' % _kernel_id_regex, ZMQChannelsHandler),
             (r'/api/kernelspecs', MainKernelSpecHandler),
             (
-                r"/(.*)", 
+                r"/(.*)",
                 tornado.web.StaticFileHandler,
                 {
                     'path': STATIC_ROOT,
@@ -171,7 +171,6 @@ class WidgetsServer(Application):
             tornado.ioloop.IOLoop.current().start()
         finally:
             shutil.rmtree(connection_dir)
-
 
 
 main = WidgetsServer.launch_instance
