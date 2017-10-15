@@ -6,6 +6,7 @@ import { RenderMime, defaultRendererFactories } from '@jupyterlab/rendermime';
 
 import { WidgetManager } from './manager'
 
+import 'font-awesome/css/font-awesome.css'
 import './widgets.css'
 
 export async function renderWidgets(baseUrl, wsUrl, loader) {

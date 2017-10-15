@@ -39,7 +39,8 @@ module.exports = [
         output: {
             filename: 'libwidgets.js',
             path: distRoot,
-            libraryTarget: 'amd'
+            libraryTarget: 'amd',
+            publicPath: '/dist/'
         },
         module: { loaders: loaders },
         devtool: 'source-map'
