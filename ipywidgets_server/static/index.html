@@ -15,28 +15,25 @@
         />
         <style>
             html, body {
-                height: 100%;
+                height: 100vh;
             }
 
-            .fill {
-                min-height: 100%;
-                height: 100%;
+            .ipywidgets-server-contents-container {
+                height: 95vh;
+                padding-top: 5vh;
+            }
+
+            #result {
+                margin-top: auto;
+                margin-bottom: auto;
             }
         </style>
     </head>
 
     <body>
-        <div class="container fill">
-            <div class="row">
-                <div class="col">
-                    <div id="errors"></div>
-                </div>
-            </div>
-            <div class="row align-items-center fill">
-                <div class="col">
-                    <div id="result"></div>
-                </div>
-            </div>
+        <div class="container fill d-flex flex-column align-items-stretch ipywidgets-server-contents-container">
+            <div id="errors"></div>
+            <div id="result"></div>
         </div>
     </body>
 </html>
