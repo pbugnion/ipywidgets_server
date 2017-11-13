@@ -107,8 +107,20 @@ class NPM(Command):
         env['PATH'] = npm_path
 
         if self.should_run_npm_install():
-            log.info("Installing build dependencies with npm.  This may take a while...")
-            check_call(['npm', 'install'], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr)
+            log.info('Installing build dependencies with npm.  This may take a while...')
+            check_call(
+                ['npm', 'install'],
+                cwd=node_root,
+                stdout=sys.stdout,
+                stderr=sys.stderr
+            )
+            log.info('Building JS dependencies.')
+            check_call(
+                ['npm', 'run', 'build'],
+                cwd=node_root,
+                stdout=sys.stdout,
+                stderr=sys.stderr
+            )
             os.utime(self.node_modules, None)
 
         for t in self.targets:
