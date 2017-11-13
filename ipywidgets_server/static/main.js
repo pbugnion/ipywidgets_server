@@ -21,7 +21,7 @@ require(['libwidgets'], function(lib) {
         lib.renderWidgets(BASEURL, WSURL, lib.requireLoader);
     } else {
         window.addEventListener(
-            'load', 
+            'load',
             function() {
                 lib.renderWidgets(BASEURL, WSURL, lib.requireLoader);
             }
