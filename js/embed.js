@@ -24,8 +24,8 @@ export async function renderWidgets(baseUrl, wsUrl, loader) {
         serverSettings: connectionInfo
     });
 
-    const el = document.getElementById('result')
-    const errorEl = document.getElementById('errors')
+    const el = document.getElementById('ipywidget-server-result')
+    const errorEl = document.getElementById('ipywidget-server-errors')
     const manager = new WidgetManager(kernel, el, loader);
     const outputModel = new OutputAreaModel({trusted: true});
     const outputView = new OutputArea({
