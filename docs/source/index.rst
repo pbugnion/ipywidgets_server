@@ -49,3 +49,14 @@ the name of the variable that holds the widget to display.
 For information on other command line arguments, run::
 
     $ ipywidgets-server --help
+
+Installation
+============
+
+Install `IPywidgets server` with:
+
+.. code-block:: bash
+
+    $ pip install ipywidgets_server
+
+Currently, `IPywidgets server` only runs on Python 3.6.
