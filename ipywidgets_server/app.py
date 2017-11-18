@@ -104,10 +104,11 @@ class WidgetsServer(Application):
     static_root = Unicode(
         str(DEFAULT_STATIC_ROOT),
         config=True,
-        help='Location of static assets (HTML, JS and CSS files).'
+        help='Directory holding static assets (HTML, JS and CSS files).'
     )
     aliases = {
-        'port': 'WidgetsServer.port'
+        'port': 'WidgetsServer.port',
+        'static': 'WidgetsServer.static_root'
     }
     connection_dir_root = Unicode(
         config=True,
