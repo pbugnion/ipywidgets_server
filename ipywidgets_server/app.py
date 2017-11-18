@@ -32,7 +32,7 @@ from traitlets import Unicode, Integer, default
 
 
 ROOT = Path(os.path.dirname(__file__))
-STATIC_ROOT = ROOT / 'static'
+DEFAULT_STATIC_ROOT = ROOT / 'static'
 
 
 class CustomKernelSpecManager(KernelSpecManager):
@@ -60,11 +60,14 @@ class CustomKernelHandler(MainKernelHandler):
             model.setdefault('name', km.default_kernel_name)
 
         kernel_id = yield tornado.gen.maybe_future(
-            km.start_kernel(kernel_name=model['name'], 
-            extra_arguments=[self.module_name, self.object_name])
+            km.start_kernel(
+                kernel_name=model['name'],
+                extra_arguments=[self.module_name, self.object_name]
+            )
         )
         model = km.kernel_model(kernel_id)
-        location = url_path_join(self.base_url, 'api', 'kernels', url_escape(kernel_id))
+        location = url_path_join(
+            self.base_url, 'api', 'kernels', url_escape(kernel_id))
         self.set_header('Location', location)
         self.set_status(201)
         self.finish(json.dumps(model, default=date_default))
@@ -155,7 +158,7 @@ class WidgetsServer(Application):
                 r"/(.*)",
                 tornado.web.StaticFileHandler,
                 {
-                    'path': STATIC_ROOT,
+                    'path': DEFAULT_STATIC_ROOT,
                     'default_filename': 'index.html'
                 }
             )
