@@ -10,6 +10,9 @@ IPywidgets server
 Notebook. Any Python callback defined on your widgets will work as in the
 notebook.
 
+Getting started: 30 seconds with IPywidgets server
+--------------------------------------------------
+
 Let's create a simple widget::
 
     # example.py
@@ -36,3 +39,13 @@ To serve this, just run the following, in the directory containing ``example.py`
 This will serve the widget on ``http://localhost:8866/``:
 
 .. image:: _images/simple-example.gif
+
+The command line argument, ``example:vbox``, is ``<module name>:<object name>``,
+where ``<module name>`` is the name of a Python module that can be imported (for
+instance, a file in the current directory, without the ``.py`` extension or a
+Python package that is installed in your environment), and ``<object name>`` is
+the name of the variable that holds the widget to display.
+
+For information on other command line arguments, run::
+
+    $ ipywidgets-server --help
