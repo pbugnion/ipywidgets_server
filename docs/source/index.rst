@@ -35,5 +35,4 @@ To serve this, just run the following, in the directory containing ``example.py`
 
 This will serve the widget on ``http://localhost:8866/``:
 
-
 .. image:: _images/simple-example.gif
