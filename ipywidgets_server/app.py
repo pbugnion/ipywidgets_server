@@ -87,7 +87,7 @@ class WidgetsServer(Application):
     )
     option_description = Unicode(
         """
-        app_module: 
+        app_module:
             String representing the widget to show. This must
             be a string of format <module>:<object>, where <module>
             is a python module that can be imported, and <object>
@@ -100,6 +100,11 @@ class WidgetsServer(Application):
         8888,
         config=True,
         help='Port of the ipywidgets server. Default 8888.'
+    )
+    static_root = Unicode(
+        str(DEFAULT_STATIC_ROOT),
+        config=True,
+        help='Location of static assets (HTML, JS and CSS files).'
     )
     aliases = {
         'port': 'WidgetsServer.port'
@@ -136,6 +141,7 @@ class WidgetsServer(Application):
             dir=self.connection_dir_root
         )
         self.log.info(f'Storing connection files in {connection_dir}.')
+        self.log.info(f'Serving static files from {self.static_root}.')
         kernel_spec_manager = CustomKernelSpecManager()
         kernel_manager = MappingKernelManager(
             default_kernel_name='ipywidgets_server_kernel',
@@ -158,7 +164,7 @@ class WidgetsServer(Application):
                 r"/(.*)",
                 tornado.web.StaticFileHandler,
                 {
-                    'path': DEFAULT_STATIC_ROOT,
+                    'path': self.static_root,
                     'default_filename': 'index.html'
                 }
             )
