@@ -51,7 +51,7 @@ For information on other command line arguments, run::
     $ ipywidgets-server --help
 
 Installation
-============
+------------
 
 Install `IPywidgets server` with:
 
