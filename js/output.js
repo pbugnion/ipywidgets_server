@@ -22,7 +22,7 @@ class OutputModel extends outputBase.OutputModel {
     defaults() {
         return {
             ...super.defaults(),
-            //msg_id: ''
+            is_capturing: false
         };
     }
 
