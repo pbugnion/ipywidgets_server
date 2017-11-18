@@ -37,7 +37,7 @@ export class WidgetManager extends HTMLManager {
     }
 
     loadClass(className, moduleName, moduleVersion) {
-        if (moduleName === 'ipywidgets_server/output') {
+        if (moduleName === '@jupyter-widgets/output') {
             return Promise.resolve(outputWidgets).then(module => {
                 if (module[className]) {
                     return module[className];

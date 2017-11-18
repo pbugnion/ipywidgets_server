@@ -22,7 +22,8 @@ class OutputModel extends outputBase.OutputModel {
     defaults() {
         return {
             ...super.defaults(),
-            is_capturing: false
+            is_capturing: false,
+            msg_id: ''
         };
     }
 
@@ -30,7 +31,7 @@ class OutputModel extends outputBase.OutputModel {
         super.initialize(attributes, options)
         // The output area model is trusted since widgets are only rendered in trusted contexts.
         this._outputs = new OutputAreaModel({trusted: true});
-        this.listenTo(this, 'change:is_capturing', this.reset_capture);
+        this.listenTo(this, 'change:msg_id', this.reset_capture);
         // TODO handle on kernel changed
         /* this.widget_manager.context.session.kernelChanged.connect((sender, kernel) => {
          *   this._msgHook.dispose();
@@ -45,11 +46,11 @@ class OutputModel extends outputBase.OutputModel {
         this._msgHook = null;
 
         let kernel = this.widget_manager.kernel;
-        //let msgId = this.get('msg_id');
+        let msgId = this.get('msg_id');
         //console.log(`messageID: ${msgId}`)
-        console.log(this.get('is_capturing'));
-        if (kernel && this.get('is_capturing')) {
-            this._msgHook = kernel.registerMessageHook(window.messageId, msg => {
+        console.log(msgId);
+        if (kernel && msgId) {
+            this._msgHook = kernel.registerMessageHook(msgId, msg => {
                 this.add(msg);
                 return false;
             });
