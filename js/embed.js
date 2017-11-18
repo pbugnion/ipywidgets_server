@@ -42,6 +42,9 @@ export async function renderWidgets(baseUrl, wsUrl, loader) {
     }
     const msg = KernelMessage.createShellMessage(options)
     const execution = kernel.sendShellMessage(msg, true)
+    console.log(msg)
+    console.log(execution)
+    window.messageId = msg.header.msg_id
     execution.onIOPub = (msg) => {
         // If we have a display message, display the widget.
         if (KernelMessage.isDisplayDataMsg(msg)) {
