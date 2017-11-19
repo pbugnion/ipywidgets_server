@@ -5,6 +5,8 @@ import * as pWidget from '@phosphor/widgets';
 
 import { HTMLManager } from '@jupyter-widgets/html-manager';
 
+import * as outputWidgets from './output';
+
 export class WidgetManager extends HTMLManager {
     constructor(kernel, el, loader) {
         super();
@@ -32,6 +34,22 @@ export class WidgetManager extends HTMLManager {
             });
             return view;
         });
+    }
+
+    loadClass(className, moduleName, moduleVersion) {
+        if (moduleName === '@jupyter-widgets/output') {
+            return Promise.resolve(outputWidgets).then(module => {
+                if (module[className]) {
+                    return module[className];
+                } else {
+                    return Promise.reject(
+                        `Class ${className} not found in module ${moduleName}`
+                    );
+                }
+            })
+        } else {
+            return super.loadClass(className, moduleName, moduleVersion)
+        }
     }
 
     _create_comm(target_name, model_id, data, metadata) {

@@ -2,9 +2,9 @@
 import { Kernel, ServerConnection, KernelMessage } from '@jupyterlab/services'
 
 import { OutputAreaModel, OutputArea } from '@jupyterlab/outputarea';
-import { RenderMime, defaultRendererFactories } from '@jupyterlab/rendermime';
 
 import { WidgetManager } from './manager'
+import { renderMime } from './renderMime'
 
 import 'font-awesome/css/font-awesome.css'
 import './widgets.css'
@@ -29,9 +29,7 @@ export async function renderWidgets(baseUrl, wsUrl, loader) {
     const manager = new WidgetManager(kernel, el, loader);
     const outputModel = new OutputAreaModel({trusted: true});
     const outputView = new OutputArea({
-        rendermime: new RenderMime({
-            initialFactories: defaultRendererFactories
-        }),
+        rendermime: renderMime,
         model: outputModel,
     })
     errorEl.appendChild(outputView.node)
