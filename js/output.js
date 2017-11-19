@@ -27,13 +27,10 @@ class OutputModel extends outputBase.OutputModel {
 
     initialize(attributes, options) {
         super.initialize(attributes, options)
-        // The output area model is trusted since widgets are only rendered in trusted contexts.
+        // The output area model is trusted since widgets are
+        // only rendered in trusted contexts.
         this._outputs = new OutputAreaModel({trusted: true});
         this.listenTo(this, 'change:msg_id', this.reset_capture);
-        // TODO handle on kernel changed
-        /* this.widget_manager.context.session.kernelChanged.connect((sender, kernel) => {
-         *   this._msgHook.dispose();
-         * });*/
         this.reset_capture();
     }
 
@@ -54,8 +51,6 @@ class OutputModel extends outputBase.OutputModel {
     }
 
     add(msg) {
-        console.log('hello message!!')
-        console.log(msg)
         const msgType = msg.header.msg_type;
         switch (msgType) {
             case 'execute_result':
@@ -65,7 +60,6 @@ class OutputModel extends outputBase.OutputModel {
                 const model = msg.content;
                 model.output_type = msgType;
                 this._outputs.add(model);
-                console.log(this._outputs)
                 break;
             case 'clear_output':
                 this.clear_output(msg.content.wait);
