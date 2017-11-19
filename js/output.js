@@ -43,10 +43,8 @@ class OutputModel extends outputBase.OutputModel {
         }
         this._msgHook = null;
 
-        let kernel = this.widget_manager.kernel;
-        let msgId = this.get('msg_id');
-        //console.log(`messageID: ${msgId}`)
-        console.log(msgId);
+        const kernel = this.widget_manager.kernel;
+        const msgId = this.get('msg_id');
         if (kernel && msgId) {
             this._msgHook = kernel.registerMessageHook(msgId, msg => {
                 this.add(msg);
@@ -58,13 +56,13 @@ class OutputModel extends outputBase.OutputModel {
     add(msg) {
         console.log('hello message!!')
         console.log(msg)
-        let msgType = msg.header.msg_type;
+        const msgType = msg.header.msg_type;
         switch (msgType) {
             case 'execute_result':
             case 'display_data':
             case 'stream':
             case 'error':
-                let model = msg.content;
+                const model = msg.content;
                 model.output_type = msgType;
                 this._outputs.add(model);
                 console.log(this._outputs)
