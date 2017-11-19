@@ -11,8 +11,6 @@ import { OutputAreaModel, OutputArea } from '@jupyterlab/outputarea';
 
 import { renderMime } from './renderMime'
 
-import * as $ from 'jquery';
-
 const OUTPUT_WIDGET_VERSION = outputBase.OUTPUT_WIDGET_VERSION;
 
 export
@@ -127,8 +125,6 @@ export class OutputView extends outputBase.OutputView {
         }
 
         this.el = this.pWidget.node;
-        //todo set this.$el
-        //this.$el = $(this.pWidget.node);
     }
 
     /**
