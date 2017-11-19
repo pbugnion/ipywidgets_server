@@ -29,11 +29,11 @@ class OutputModel extends outputBase.OutputModel {
         // The output area model is trusted since widgets are
         // only rendered in trusted contexts.
         this._outputs = new OutputAreaModel({trusted: true});
-        this.listenTo(this, 'change:msg_id', this.reset_capture);
-        this.reset_capture();
+        this.listenTo(this, 'change:msg_id', this.onMsgIdChange);
+        this.onMsgIdChange();
     }
 
-    reset_capture() {
+    onMsgIdChange() {
         if (this._msgHook) {
             this._msgHook.dispose();
         }
