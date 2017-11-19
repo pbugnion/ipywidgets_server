@@ -1,5 +1,5 @@
-// Copyright (c) Jupyter Development Team.
-// Distributed under the terms of the Modified BSD License.
+// This is mostly copied from
+// https://github.com/jupyter-widgets/ipywidgets/blob/master/packages/jupyterlab-manager/src/output.ts
 
 import * as outputBase from '@jupyter-widgets/output';
 
