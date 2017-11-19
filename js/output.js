@@ -5,13 +5,11 @@ import * as outputBase from '@jupyter-widgets/output';
 
 import { DOMWidgetView, JupyterPhosphorWidget } from '@jupyter-widgets/base';
 
-import { RenderMime, defaultRendererFactories } from '@jupyterlab/rendermime';
-
 import { Panel } from '@phosphor/widgets';
 
-import { WidgetManager } from './manager';
-
 import { OutputAreaModel, OutputArea } from '@jupyterlab/outputarea';
+
+import { renderMime } from './renderMime'
 
 import * as $ from 'jquery';
 
@@ -147,12 +145,8 @@ export class OutputView extends outputBase.OutputView {
      */
     render() {
         super.render();
-        // todo centralize rendermime
-        const rendermime = new RenderMime({
-            initialFactories: defaultRendererFactories
-        })
         this._outputView = new OutputArea({
-            rendermime,
+            rendermime: renderMime,
             contentFactory: OutputArea.defaultContentFactory,
             model: this.model.outputs
         });
