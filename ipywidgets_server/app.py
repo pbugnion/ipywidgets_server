@@ -119,7 +119,10 @@ class WidgetsServer(Application):
     }
     connection_dir_root = Unicode(
         config=True,
-        help=f'Location of temporary connection files. Defaults to system `tempfile.gettempdir()` value.'
+        help=(
+            'Location of temporary connection files. Defaults '
+            'to system `tempfile.gettempdir()` value.'
+        )
     )
     connection_dir = Unicode()
 
