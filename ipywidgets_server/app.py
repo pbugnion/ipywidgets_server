@@ -133,6 +133,10 @@ class WidgetsServer(Application):
         self.log.info(f'Using {connection_dir} to store connection files')
         return connection_dir
 
+    @default('log_level')
+    def _default_log_level(self):
+        return logging.INFO
+
     def parse_command_line(self, argv=None):
         super(WidgetsServer, self).parse_command_line(argv)
         try:
