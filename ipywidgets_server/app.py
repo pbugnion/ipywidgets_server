@@ -44,7 +44,6 @@ class CustomKernelSpecManager(KernelSpecManager):
         return {'ipywidgets_server_kernel': str(ROOT)}
 
     def get_kernel_spec(self, name):
-        print(name)
         if name == 'ipywidgets_server_kernel':
             return self.kernel_spec_class.from_resource_dir(str(ROOT))
 
