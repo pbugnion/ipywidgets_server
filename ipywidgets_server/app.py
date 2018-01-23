@@ -36,9 +36,17 @@ DEFAULT_STATIC_ROOT = ROOT / 'static'
 
 
 class CustomKernelSpecManager(KernelSpecManager):
+    """
+    Custom kernel manager that only returns the custom ipywidgets-server kernel
+    """
 
     def find_kernel_specs(self):
         return {'ipywidgets_server_kernel': str(ROOT)}
+
+    def get_kernel_spec(self, name):
+        print(name)
+        if name == 'ipywidgets_server_kernel':
+            return self.kernel_spec_class.from_resource_dir(str(ROOT))
 
 
 class CustomKernelHandler(MainKernelHandler):
