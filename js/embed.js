@@ -3,11 +3,31 @@ import { Kernel, ServerConnection, KernelMessage } from '@jupyterlab/services'
 
 import { OutputAreaModel, OutputArea } from '@jupyterlab/outputarea';
 
+import { URLExt } from '@jupyterlab/coreutils';
+
 import { WidgetManager } from './manager'
 import { renderMime } from './renderMime'
 
 import 'font-awesome/css/font-awesome.css'
 import './widgets.css'
+
+// TODO - put this into singleton class to avoid
+// standalone global variable
+let kernelId = "";
+let kernelGlobal = null;
+
+export async function killProcess(baseUrl, wsUrl) {
+    let connectionInfo = ServerConnection.makeSettings({
+        baseUrl,
+        wsUrl
+    });
+
+    const init = { method: 'DELETE' }
+    const deleteUrl = URLExt.join(baseUrl, "api", "kernels", kernelId)
+    console.log("SERVER REQUEST=", deleteUrl)
+    let result = await kernelGlobal.shutdown()
+    ServerConnection.makeRequest(deleteUrl, init, connectionInfo)
+}
 
 export async function renderWidgets(baseUrl, wsUrl, loader) {
     let connectionInfo = ServerConnection.makeSettings({
@@ -23,6 +43,10 @@ export async function renderWidgets(baseUrl, wsUrl, loader) {
         name: kernelSpecs.default,
         serverSettings: connectionInfo
     });
+
+    kernelGlobal = kernel;
+
+    kernelId = kernel.id
 
     const el = document.getElementById('ipywidget-server-result')
     const errorEl = document.getElementById('ipywidget-server-errors')
