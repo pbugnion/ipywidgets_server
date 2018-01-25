@@ -3,8 +3,6 @@ import { Kernel, ServerConnection, KernelMessage } from '@jupyterlab/services'
 
 import { OutputAreaModel, OutputArea } from '@jupyterlab/outputarea';
 
-import { URLExt } from '@jupyterlab/coreutils';
-
 import { WidgetManager } from './manager'
 import { renderMime } from './renderMime'
 
