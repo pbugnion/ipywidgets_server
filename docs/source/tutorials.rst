@@ -31,7 +31,6 @@ ticker symbol and fetch information about the current stock price from the
         widgets.Text(disabled=True)
     ])
 
-
     def get_stock_price(symbol):
         """ Fetch stock price for `symbol` from quandl API """
         with urlopen(BASE_URL.format(symbol)) as response:
@@ -70,7 +69,6 @@ ticker symbol and fetch information about the current stock price from the
 
     fetch_button.on_click(on_button_click)
 
-
     container = widgets.VBox([
         widgets.HBox([stock_input, fetch_button]),
         result_container
@@ -80,6 +78,9 @@ ticker symbol and fetch information about the current stock price from the
 To run the example, enter this shell command::
 
     $ ipywidgets-server example:container
+
+This will serve this example on the default port, 8866. Visit
+``http://127.0.0.1:8866`` with your browser, and you should see the widget.
 
 We note the following:
 
@@ -117,9 +118,7 @@ example is in `examples/matplotlib_simple`::
     SIZE = 50
     XBASIS = np.linspace(0.0, 1.0, SIZE)
 
-
     container = widgets.VBox()
-
 
     def update():
         """ Generate a new random plot and embed it into the container """
@@ -131,9 +130,7 @@ example is in `examples/matplotlib_simple`::
             plt.show()
         container.children = [output]
 
-
     display(container)
-
 
     while True:
         # Update the plot in a busy loop
@@ -143,14 +140,16 @@ example is in `examples/matplotlib_simple`::
 
 Save this script to a file called `example.py`. You can then run::
 
-    ipywidgets-server example:container
+    $ ipywidgets-server example:container
 
-Head over to `http://127.0.0.1:8866` in your browser. You should see the widget.
+Head over to ``http://127.0.0.1:8866`` in your browser. You should see the widget.
 
 .. image:: images/matplotlib-simple.png
 
 For a more complex example, let's build a widget to explore how the `sin` changes
 depending on the parameters that are passed. We will plot ``a * sin(k*x)``, with sliders to change the value of ``a`` and ``k``::
+
+    # example.py
 
     import matplotlib.pyplot as plt
 
@@ -204,6 +203,10 @@ depending on the parameters that are passed. We will plot ``a * sin(k*x)``, with
 
     container = SineRenderer().render()
 
+Save this script to a file called `example.py`. You can then run::
+
+    $ ipywidgets-server example:container
+
 .. image:: images/matplotlib-sine.png
 
 It is worth noting the following:
@@ -213,10 +216,3 @@ It is worth noting the following:
  - We handle reacting to changes in the sliders by `observing` the ``value`` traitlet of the slider. The ``.observe`` method takes a callback as first argument. The callback that we pass in just re-renders the plot. The second argument to ``.observe`` is a list of attributes of the slider to observe. We only want to react to changes in the slider value (rather than, say, its maximum or minimum).
  - The ``render`` method of our application renders the dynamic components and returns the top level widget.
 
-
-..
-   Creating widgets with bqplot
-   ----------------------------
-
-   Creating widgets with ipyvolume
-   -------------------------------
