@@ -9,19 +9,29 @@ import ipywidgets as widgets
 BASE_URL = 'https://www.quandl.com/api/v3/datasets/WIKI/{}.json?rows=1'
 
 stock_input = widgets.Text('GOOG')
-fetch_button = widgets.Button(description='fetch')
+fetch_button = widgets.Button(description='FETCH')
 result_container = widgets.HBox([
     widgets.Text(disabled=True)
 ])
 
 
 def get_stock_price(symbol):
+    """ Fetch stock price for `symbol` from quandl API """
     with urlopen(BASE_URL.format(symbol)) as response:
         response_json = json.loads(response.read())
     return response_json['dataset']['data'][0][1]
 
 
+def handle_fetch_error(error, symbol):
+    if error.code == 404:
+        message = 'Stock symbol {} not found'.format(symbol)
+    else:
+        message = 'Unexpected error'
+    result_container.children = [widgets.Label(message)]
+
+
 def on_button_click(arg):
+    """ Callback when 'fetch' button is clicked """
     # Disable widgets to give feedback that something is happening
     stock_input.disabled = True
     fetch_button.disabled = True
@@ -33,12 +43,8 @@ def on_button_click(arg):
         result_container.children = [
             widgets.Text(str(stock_price), disabled=True)
         ]
-    except HTTPError as e:
-        if e.code == 404:
-            message = 'Stock symbol {} not found'.format(symbol)
-        else:
-            message = 'Unexpected error'
-        result_container.children = [widgets.Label(message)]
+    except HTTPError as error:
+        handle_fetch_error(error, symbol)
 
     # Re-enable the widgets
     stock_input.disabled = False
