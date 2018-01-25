@@ -15,7 +15,6 @@ let kernelGlobal = null;
 
 export async function killProcess(baseUrl, wsUrl) {
     let result = await kernelGlobal.shutdown()
-    ServerConnection.makeRequest(deleteUrl, init, connectionInfo)
 }
 
 export async function renderWidgets(baseUrl, wsUrl, loader) {
