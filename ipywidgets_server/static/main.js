@@ -18,10 +18,7 @@ require(['libwidgets'], function(lib) {
     }
 
     window.addEventListener("beforeunload", function (e) {
-        lib.killProcess(BASEURL, WSURL);
-        var confirmationMessage = "";
-        (e || window.event).returnValue = confirmationMessage;
-        return confirmationMessage;
+        lib.killProcess();
     });
 
     if (document.readyState === 'complete') {

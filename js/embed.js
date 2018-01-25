@@ -13,18 +13,9 @@ import './widgets.css'
 
 // TODO - put this into singleton class to avoid
 // standalone global variable
-let kernelId = "";
 let kernelGlobal = null;
 
 export async function killProcess(baseUrl, wsUrl) {
-    let connectionInfo = ServerConnection.makeSettings({
-        baseUrl,
-        wsUrl
-    });
-
-    const init = { method: 'DELETE' }
-    const deleteUrl = URLExt.join(baseUrl, "api", "kernels", kernelId)
-    console.log("SERVER REQUEST=", deleteUrl)
     let result = await kernelGlobal.shutdown()
     ServerConnection.makeRequest(deleteUrl, init, connectionInfo)
 }
@@ -45,8 +36,6 @@ export async function renderWidgets(baseUrl, wsUrl, loader) {
     });
 
     kernelGlobal = kernel;
-
-    kernelId = kernel.id
 
     const el = document.getElementById('ipywidget-server-result')
     const errorEl = document.getElementById('ipywidget-server-errors')
