@@ -7,7 +7,8 @@ Simple widget
 
 Let's build a stock price fetcher. We will allow the user to enter a stock
 ticker symbol and fetch information about the current stock price from the
-`Quandl API <https://www.quandl.com/>`_.
+`Quandl API <https://www.quandl.com/>`_. The code for this example is also available in
+`examples/stock_price <https://github.com/pbugnion/ipywidgets_server/tree/master/examples/stock_price>`_.
 
 .. image:: images/stock-price.png
 
@@ -102,7 +103,8 @@ Let's build a simple application that updates a matplotlib plot every second. We
 use an ``Output`` widget to get capture the matplotlib plot. We then embed our
 output widget in a top-level container. Every second, we generate a new output
 widget containing a new plot and swap it into the container. The code for this
-example is in `examples/matplotlib_simple`::
+example is in `examples/matplotlib_random
+<https://github.com/pbugnion/ipywidgets_server/tree/master/examples/matplotlib_random>`_::
 
     # example.py
 
@@ -146,8 +148,11 @@ Head over to ``http://127.0.0.1:8866`` in your browser. You should see the widge
 
 .. image:: images/matplotlib-simple.png
 
-For a more complex example, let's build a widget to explore how the `sin` changes
-depending on the parameters that are passed. We will plot ``a * sin(k*x)``, with sliders to change the value of ``a`` and ``k``::
+For a more complex example, let's build a widget to explore how the `sin`
+changes depending on the parameters that are passed. We will plot ``a *
+sin(k*x)``, with sliders to change the value of ``a`` and ``k``. The code for
+this example is also available at `examples/matplotlib_sine_waves
+<https://github.com/pbugnion/ipywidgets_server/tree/master/examples/matplotlib_sine_waves>`_::
 
     # example.py
 
