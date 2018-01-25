@@ -8,18 +8,17 @@ import ipywidgets as widgets
 
 BASE_URL = 'https://www.quandl.com/api/v3/datasets/WIKI/{}.json?rows=1'
 
-
-def get_stock_price(symbol):
-    with urlopen(BASE_URL.format(symbol)) as response:
-        response_json = json.loads(response.read())
-    return response_json['dataset']['data'][0][1]
-
-
 stock_input = widgets.Text('GOOG')
 fetch_button = widgets.Button(description='fetch')
 result_container = widgets.HBox([
     widgets.Text(disabled=True)
 ])
+
+
+def get_stock_price(symbol):
+    with urlopen(BASE_URL.format(symbol)) as response:
+        response_json = json.loads(response.read())
+    return response_json['dataset']['data'][0][1]
 
 
 def on_button_click(arg):
