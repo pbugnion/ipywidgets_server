@@ -7,7 +7,11 @@ Simple widget
 
 Let's build a stock price fetcher. We will allow the user to enter a stock
 ticker symbol and fetch information about the current stock price from the
-`Quandl API <https://www.quandl.com/>`_::
+`Quandl API <https://www.quandl.com/>`_.
+
+.. image:: images/stock-price.png
+
+::
 
     # example.py
 
@@ -76,6 +80,8 @@ ticker symbol and fetch information about the current stock price from the
 To run the example, enter this shell command::
 
     $ ipywidgets-server example:container
+
+We note the following:
 
 - we wrap all the widgets into a top-level container, ``container``. This is the
   widget we then ask ``ipywidgets-server`` to display.
