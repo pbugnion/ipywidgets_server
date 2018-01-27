@@ -2,6 +2,7 @@
 import * as base from '@jupyter-widgets/base'
 import * as controls from '@jupyter-widgets/controls';
 import * as pWidget from '@phosphor/widgets';
+import { Signal } from '@phosphor/signaling';
 
 import { HTMLManager } from '@jupyter-widgets/html-manager';
 
@@ -15,6 +16,11 @@ export class WidgetManager extends HTMLManager {
         this.registerWithKernel(kernel)
         this.el = el;
         this.loader = loader;
+        this._onError = new Signal(this)
+    }
+
+    get onError() {
+        return this._onError
     }
 
     registerWithKernel(kernel) {
@@ -58,7 +64,7 @@ export class WidgetManager extends HTMLManager {
         const baseCallbacks = super.callbacks(view)
         return {
             ...baseCallbacks,
-            iopub: { output: (msg) => console.log(msg) }
+            iopub: { output: (msg) => this._onError.emit(msg) }
         }
     }
 

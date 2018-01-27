@@ -27,6 +27,7 @@ export async function renderWidgets(baseUrl, wsUrl, loader) {
 
     const errorEl = document.getElementById('ipywidget-server-errors')
     const errorView = new ErrorView(errorEl);
+    manager.onError.connect((sender, msg) => errorView.showError(msg.content))
 
     const options = {
         msgType: 'custom_message',
