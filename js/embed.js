@@ -1,10 +1,8 @@
 
 import { Kernel, ServerConnection, KernelMessage } from '@jupyterlab/services'
 
-import { OutputAreaModel, OutputArea } from '@jupyterlab/outputarea';
-
 import { WidgetManager } from './manager'
-import { renderMime } from './renderMime'
+import { ErrorView } from './ErrorView'
 
 import 'font-awesome/css/font-awesome.css'
 import './widgets.css'
@@ -25,14 +23,10 @@ export async function renderWidgets(baseUrl, wsUrl, loader) {
     });
 
     const el = document.getElementById('ipywidget-server-result')
-    const errorEl = document.getElementById('ipywidget-server-errors')
     const manager = new WidgetManager(kernel, el, loader);
-    const outputModel = new OutputAreaModel({trusted: true});
-    const outputView = new OutputArea({
-        rendermime: renderMime,
-        model: outputModel,
-    })
-    errorEl.appendChild(outputView.node)
+
+    const errorEl = document.getElementById('ipywidget-server-errors')
+    const errorView = new ErrorView(errorEl);
 
     const options = {
         msgType: 'custom_message',
@@ -55,9 +49,7 @@ export async function renderWidgets(baseUrl, wsUrl, loader) {
         }
         else if (KernelMessage.isErrorMsg(msg)) {
             // Show errors to help with debugging
-            const model = msg.content
-            model.output_type = 'error'
-            outputModel.add(model)
+            errorView.showError(msg.content)
         }
     }
 }
