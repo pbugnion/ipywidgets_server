@@ -52,9 +52,9 @@ module.exports = [
         output: {
             filename : 'base.js',
             path: path.resolve(distRoot, '@jupyter-widgets'),
-            libraryTarget: 'amd',
+            libraryTarget: 'amd'
         },
-        module: { loaders: loaders },
+        module: { loaders: loaders }
     },
     {// @jupyter-widgets/controls
         entry: '@jupyter-widgets/controls/lib/index',

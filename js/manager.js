@@ -2,10 +2,12 @@
 import * as base from '@jupyter-widgets/base'
 import * as controls from '@jupyter-widgets/controls';
 import * as pWidget from '@phosphor/widgets';
+import { Signal } from '@phosphor/signaling';
 
 import { HTMLManager } from '@jupyter-widgets/html-manager';
 
 import * as outputWidgets from './output';
+import { ShimmedComm } from './services-shim'
 
 export class WidgetManager extends HTMLManager {
     constructor(kernel, el, loader) {
@@ -14,6 +16,11 @@ export class WidgetManager extends HTMLManager {
         this.registerWithKernel(kernel)
         this.el = el;
         this.loader = loader;
+        this._onError = new Signal(this)
+    }
+
+    get onError() {
+        return this._onError
     }
 
     registerWithKernel(kernel) {
@@ -22,7 +29,8 @@ export class WidgetManager extends HTMLManager {
         }
         this._commRegistration = kernel.registerCommTarget(
             this.comm_target_name,
-            (comm, msg) => this.handle_comm_open(new base.shims.services.Comm(comm), msg)
+            (comm, message) =>
+                this.handle_comm_open(new ShimmedComm(comm), message)
         );
     }
 
@@ -52,12 +60,20 @@ export class WidgetManager extends HTMLManager {
         }
     }
 
+    callbacks(view) {
+        const baseCallbacks = super.callbacks(view)
+        return {
+            ...baseCallbacks,
+            iopub: { output: (msg) => this._onError.emit(msg) }
+        }
+    }
+
     _create_comm(target_name, model_id, data, metadata) {
         const comm = this.kernel.connectToComm(target_name, model_id)
         if (data || metdata) {
             comm.open(data, metadata)
         }
-        return Promise.resolve(new base.shims.services.Comm(comm))
+        return Promise.resolve(new ShimmedComm(comm))
     }
 
     _get_comm_info() {
