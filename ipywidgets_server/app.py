@@ -104,9 +104,9 @@ class WidgetsServer(Application):
     module_name = Unicode()
     object_name = Unicode()
     port = Integer(
-        8888,
+        8866,
         config=True,
-        help='Port of the ipywidgets server. Default 8888.'
+        help='Port of the ipywidgets server. Default 8866.'
     )
     static_root = Unicode(
         str(DEFAULT_STATIC_ROOT),
