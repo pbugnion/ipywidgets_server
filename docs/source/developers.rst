@@ -16,7 +16,7 @@ If you make changes to the ``js/`` directory, you will need to rebuild the front
     cd js/
     npm run build
 
-You will then need to refresh any open browser pages that contain `ipywidgets-server` instances. If you are making many changes to the JavaScript, you can build the frontend for every change with::
+You will then need to refresh any open browser pages that contain `ipywidgets-server` instances. If you are making many changes to the ``js/`` directory, you can automatically build the frontend for every change with::
 
     npm run build:watch
 
