@@ -14,3 +14,4 @@ notebook.
 .. toctree::
     intro
     tutorials
+    developers
