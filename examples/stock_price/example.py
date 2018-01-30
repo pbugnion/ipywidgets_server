@@ -25,8 +25,10 @@ def get_stock_price(symbol):
 def handle_fetch_error(error, symbol):
     if error.code == 404:
         message = 'Stock symbol {} not found'.format(symbol)
+    elif error.code == 429:
+        message = 'Too many requests to the API. Try again later.'
     else:
-        message = 'Unexpected error'
+        message = 'Unexpected error status: {}'.format(error.code)
     result_container.children = [widgets.Label(message)]
 
 
