@@ -1,5 +1,6 @@
 
 *.swp
+*.pyc
 
 node_modules
 __pycache__
@@ -7,3 +8,5 @@ dist/
 npm-debug.log
 package-lock.json
 ipywidgets_server.egg-info
+
+docs/build/

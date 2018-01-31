@@ -2,12 +2,16 @@
 Jupyter widgets server
 ======================
 
+[![Documentation Status](https://readthedocs.org/projects/ipywidgets-server/badge/?version=latest)](http://ipywidgets-server.readthedocs.io/en/latest/?badge=latest)
+
 Ever wanted to display Jupyter widgets outside of a notebook environment?
 This lets you do it.
 
+For more information, view the [docs page](http://ipywidgets-server.readthedocs.io/en/stable/).
+
 **Warnings**
 
-This project is very much embryonic. You probably should not use this in production.
+You probably should not use this in production yet.
 
 This only supports Python 3.6 at present (PRs welcome)!
 
@@ -51,6 +55,10 @@ To serve the widget, go to the directory containing `example.py` and run:
 ```
 $ ipywidgets-server example:vbox
 ```
+
+This will serve the widget on `http://localhost:8866`:
+
+![example-widget](docs/source/_images/simple-example.gif)
 
 The command line argument is `<module name>:<object name>`, where `<module
 name>` is the name of a Python module that can be imported, and `<object
