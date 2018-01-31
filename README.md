@@ -2,12 +2,16 @@
 Jupyter widgets server
 ======================
 
+[![Documentation Status](https://readthedocs.org/projects/ipywidgets-server/badge/?version=latest)](http://ipywidgets-server.readthedocs.io/en/latest/?badge=latest)
+
 Ever wanted to display Jupyter widgets outside of a notebook environment?
 This lets you do it.
 
+For more information, view the [docs page](http://ipywidgets-server.readthedocs.io/en/stable/).
+
 **Warnings**
 
-This project is very much embryonic. You probably should not use this in production.
+You probably should not use this in production yet.
 
 This only supports Python 3.6 at present (PRs welcome)!
 
