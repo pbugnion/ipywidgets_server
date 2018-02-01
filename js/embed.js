@@ -16,11 +16,9 @@ export class WidgetApplication {
     }
 
     async renderWidgets() {
-        var baseUrl = this._baseUrl
-        var wsUrl = this._wsUrl
         let connectionInfo = ServerConnection.makeSettings({
-            baseUrl,
-            wsUrl
+            baseUrl : this._baseUrl,
+            wsUrl : this._wsUrl
         });
 
         const kernelSpecs = await Kernel.getSpecs(connectionInfo)
