@@ -1,2 +1,2 @@
-export * from './embed';
+export { WidgetApplication } from './WidgetApplication';
 export * from './loader';
