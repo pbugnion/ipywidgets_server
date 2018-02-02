@@ -17,13 +17,19 @@ require(['libwidgets'], function(lib) {
         WSURL = 'ws://' + window.location.host
     }
 
+    var widgetApp = new lib.WidgetApplication(BASEURL, WSURL, lib.requireLoader);
+
+    window.addEventListener("beforeunload", function (e) {
+        widgetApp.cleanWidgets();
+    });
+
     if (document.readyState === 'complete') {
-        lib.renderWidgets(BASEURL, WSURL, lib.requireLoader);
+        widgetApp.renderWidgets();
     } else {
         window.addEventListener(
             'load',
             function() {
-                lib.renderWidgets(BASEURL, WSURL, lib.requireLoader);
+                widgetApp.renderWidgets();
             }
         );
     }
