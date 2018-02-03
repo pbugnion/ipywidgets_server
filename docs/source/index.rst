@@ -12,6 +12,13 @@ notebook.
 
 
 .. toctree::
-    intro
-    tutorials
-    developers
+   :maxdepth: 2
+
+   intro
+   tutorials
+   developers
+
+.. toctree::
+   :maxdepth: 1
+
+   release_notes
