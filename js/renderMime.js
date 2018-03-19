@@ -1,6 +1,6 @@
 
-import { RenderMime, defaultRendererFactories } from '@jupyterlab/rendermime';
+import { RenderMimeRegistry, standardRendererFactories } from '@jupyterlab/rendermime';
 
-export const renderMime = new RenderMime({
-    initialFactories: defaultRendererFactories
+export const renderMime = new RenderMimeRegistry({
+    initialFactories: standardRendererFactories
 });
