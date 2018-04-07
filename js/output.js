@@ -112,7 +112,7 @@ class JupyterPhosphorPanelWidget extends Panel {
 export class OutputView extends outputBase.OutputView {
 
     _createElement(tagName) {
-        this.pWidget = new JupyterPhosphorPanelWidget({ view: this });
+        this.pWidget = new Panel()
         return this.pWidget.node;
     }
 

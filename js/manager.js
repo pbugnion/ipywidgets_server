@@ -37,8 +37,9 @@ export class WidgetManager extends HTMLManager {
     }
 
     display_view(msg, view, options) {
+        const el = options.el || this.el;
         return Promise.resolve(view).then(view => {
-            pWidget.Widget.attach(view.pWidget, this.el);
+            pWidget.Widget.attach(view.pWidget, el);
             view.on('remove', function() {
                 console.log('view removed', view);
             });
