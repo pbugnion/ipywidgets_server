@@ -7,7 +7,8 @@ import { Signal } from '@phosphor/signaling';
 import { HTMLManager } from '@jupyter-widgets/html-manager';
 
 import * as outputWidgets from './output';
-import { ShimmedComm } from './services-shim'
+import { ShimmedComm } from './services-shim';
+import { createRenderMimeRegistryWithWidgets } from './renderMime';
 
 export class WidgetManager extends HTMLManager {
     constructor(kernel, el, loader) {
@@ -16,6 +17,7 @@ export class WidgetManager extends HTMLManager {
         this.registerWithKernel(kernel)
         this.el = el;
         this.loader = loader;
+        this.renderMime = createRenderMimeRegistryWithWidgets(this);
         this._onError = new Signal(this)
     }
 

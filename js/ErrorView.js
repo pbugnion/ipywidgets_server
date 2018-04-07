@@ -1,6 +1,6 @@
 
 import { OutputAreaModel, OutputArea } from '@jupyterlab/outputarea';
-import { renderMime } from './renderMime'
+import { createSimpleRenderMimeRegistry } from './renderMime'
 
 // Output view for errors in callbacks
 export class ErrorView {
@@ -8,7 +8,7 @@ export class ErrorView {
         this._element = element
         this._outputModel = new OutputAreaModel({trusted: true})
         this._outputView = new OutputArea({
-            rendermime: renderMime,
+            rendermime: createSimpleRenderMimeRegistry(),
             model: this._outputModel,
         })
         this._element.appendChild(this._outputView.node)
