@@ -9,8 +9,6 @@ import { Panel } from '@phosphor/widgets';
 
 import { OutputAreaModel, OutputArea } from '@jupyterlab/outputarea';
 
-import { renderMime } from './renderMime'
-
 const OUTPUT_WIDGET_VERSION = outputBase.OUTPUT_WIDGET_VERSION;
 
 export
@@ -114,7 +112,7 @@ class JupyterPhosphorPanelWidget extends Panel {
 export class OutputView extends outputBase.OutputView {
 
     _createElement(tagName) {
-        this.pWidget = new JupyterPhosphorPanelWidget({ view: this });
+        this.pWidget = new Panel()
         return this.pWidget.node;
     }
 
@@ -133,12 +131,11 @@ export class OutputView extends outputBase.OutputView {
     render() {
         super.render();
         this._outputView = new OutputArea({
-            rendermime: renderMime,
+            rendermime: this.model.widget_manager.renderMime,
             contentFactory: OutputArea.defaultContentFactory,
             model: this.model.outputs
         });
         this.pWidget.insertWidget(0, this._outputView);
-
         this.pWidget.addClass('jupyter-widgets');
         this.pWidget.addClass('widget-output');
         this.update(); // Set defaults.

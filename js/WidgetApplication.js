@@ -5,6 +5,7 @@ import { WidgetManager } from './manager'
 import { ErrorView } from './ErrorView'
 
 import 'font-awesome/css/font-awesome.css'
+import '@phosphor/widgets/style/index.css'
 import './widgets.css'
 
 
