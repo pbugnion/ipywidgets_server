@@ -1,4 +1,3 @@
-
 import * as base from '@jupyter-widgets/base'
 import * as controls from '@jupyter-widgets/controls';
 import * as pWidget from '@phosphor/widgets';
@@ -9,6 +8,11 @@ import { HTMLManager } from '@jupyter-widgets/html-manager';
 import * as outputWidgets from './output';
 import { ShimmedComm } from './services-shim';
 import { createRenderMimeRegistryWithWidgets } from './renderMime';
+
+if (typeof window !== "undefined" && typeof window.define !== "undefined") {
+  window.define("@jupyter-widgets/base", base);
+  window.define("@jupyter-widgets/controls", controls);
+}
 
 export class WidgetManager extends HTMLManager {
     constructor(kernel, el, loader) {
