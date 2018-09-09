@@ -10,11 +10,11 @@ requirejs.config({
 // available to community widget libraries that have these normally
 // defined as external.
 define('@jupyter-widgets/base', ['libwidgets'], function(lib) {
-  return lib.base;
+    return lib.base;
 })
 
 define('@jupyter-widgets/controls', ['libwidgets'], function(lib) {
-  return lib.controls;
+    return lib.controls;
 })
 
 require(['libwidgets'], function(lib) {
