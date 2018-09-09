@@ -9,11 +9,6 @@ import * as outputWidgets from './output';
 import { ShimmedComm } from './services-shim';
 import { createRenderMimeRegistryWithWidgets } from './renderMime';
 
-if (typeof window !== "undefined" && typeof window.define !== "undefined") {
-  window.define("@jupyter-widgets/base", base);
-  window.define("@jupyter-widgets/controls", controls);
-}
-
 export class WidgetManager extends HTMLManager {
     constructor(kernel, el, loader) {
         super();
