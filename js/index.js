@@ -6,5 +6,3 @@ export * from './loader';
 
 export * as base from '@jupyter-widgets/base'
 export * as controls from '@jupyter-widgets/controls'
-
-
