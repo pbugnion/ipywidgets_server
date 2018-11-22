@@ -1,4 +1,3 @@
-
 import * as base from '@jupyter-widgets/base'
 import * as controls from '@jupyter-widgets/controls';
 import * as pWidget from '@phosphor/widgets';
