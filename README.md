@@ -1,6 +1,24 @@
 
-Jupyter widgets server
-======================
+[Unmaintained] Jupyter widgets server
+=====================================
+
+**This project is in sunset mode**. It is no longer actively maintained.
+
+To serve widgets and rich outputs, we recommend using [voila](https://github.com/quantstack/voila) instead. See [this issue](https://github.com/pbugnion/ipywidgets_server/issues/48) for a discussion.
+
+
+----
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 [![Documentation Status](https://readthedocs.org/projects/ipywidgets-server/badge/?version=latest)](http://ipywidgets-server.readthedocs.io/en/latest/?badge=latest)
 
